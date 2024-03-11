@@ -61,6 +61,18 @@ namespace LinAlgLib {
 			return Cols;
 		}
 
+		//Simple setters:------------------------------------------------------------------------------------------------------------------------------
+
+		void set_element(int row, int col, T new_val) {
+			if (row < 0 || row >= Rows) {
+				//throw something
+			}
+			if (col < 0 || col >= Cols) {
+				//throw something
+			}
+			Data[row][col] = new_val;
+		}
+
 
 	};
 }

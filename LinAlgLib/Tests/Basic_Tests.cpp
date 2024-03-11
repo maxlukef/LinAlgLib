@@ -27,3 +27,13 @@ TEST(BasicTests, SmallCtorValueTest) {
 	ASSERT_EQ(m.get_rows(), 2);
 	ASSERT_EQ(m.get_cols(), 2);
 }
+
+TEST(BasicTests, SetterTest) {
+	LinAlgLib::Matrix<double> m(3, 3);
+	m.set_element(2, 2, 5);
+	m.set_element(1, 0, -5);
+	m.set_element(0, 1, 10);
+	ASSERT_EQ(m.get_element(2, 2), 5.0);
+	ASSERT_EQ(m.get_element(1, 0), -5.0);
+	ASSERT_EQ(m.get_element(0, 1), 10.0);
+}
