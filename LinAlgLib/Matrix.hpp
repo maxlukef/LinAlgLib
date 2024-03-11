@@ -19,9 +19,9 @@ namespace LinAlgLib {
 			Rows = rows;
 			Cols = cols;
 			for (int i = 0; i < rows; i++) {
-				Data.push_back(std::vector<T>())
+				Data.push_back(std::vector<T>());
 				for (int j = 0; j < cols; j++) {
-					data[i].push_back(0);
+					Data[i].push_back(0);
 				}
 			}
 		}
