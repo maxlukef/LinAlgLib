@@ -13,6 +13,7 @@ namespace LinAlgLib {
 		int Cols;
 	public:
 
+		//Constructors:-----------------------------------------------------------------------------------------------------------------------------
 		//Constructor that initializes values to zero
 		Matrix<T>(int rows, int cols) {
 			Data = std::vector<std::vector<T>>();
@@ -41,7 +42,7 @@ namespace LinAlgLib {
 			Data = data;
 		}
 
-
+		//Simple getters:-----------------------------------------------------------------------------------------------------------------------------
 		T get_element(int row, int col) {
 			if (row < 0 || row >= this->Rows) {
 				//throw some kind of element out of bounds exception
@@ -50,6 +51,14 @@ namespace LinAlgLib {
 				//throw some kind of element out of bounds exception
 			}
 			return Data[row][col];
+		}
+
+		int get_rows() {
+			return Rows;
+		}
+
+		int get_cols() {
+			return Cols;
 		}
 
 
