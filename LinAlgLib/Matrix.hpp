@@ -80,9 +80,9 @@ namespace LinAlgLib {
 				//throw something - make mismatched dimension exception
 			}
 			Matrix<T> new_matrix(Rows, Cols);
-			for (int i = 0; i < rows; i++) {
-				for (int j = 0; j < cols; j++) {
-					new_matrix.Data[i][j] = Data[i][j] + other->Data[i][j];
+			for (int i = 0; i < Rows; i++) {
+				for (int j = 0; j < Cols; j++) {
+					new_matrix.Data[i][j] = Data[i][j] + other.Data[i][j];
 				}
 			}
 			return new_matrix;
@@ -93,9 +93,9 @@ namespace LinAlgLib {
 				//throw something - make mismatched dimension exception
 			}
 			Matrix<T> new_matrix(Rows, Cols);
-			for (int i = 0; i < rows; i++) {
-				for (int j = 0; j < cols; j++) {
-					new_matrix.Data[i][j] = Data[i][j] - other->Data[i][j];
+			for (int i = 0; i < Rows; i++) {
+				for (int j = 0; j < Cols; j++) {
+					new_matrix.Data[i][j] = Data[i][j] - other.Data[i][j];
 				}
 			}
 			return new_matrix;
@@ -108,11 +108,12 @@ namespace LinAlgLib {
 			Matrix<T> new_matrix(Rows, rhs.Cols);
 			for (int i = 0; i < new_matrix.get_rows(); i++) {
 				for (int j = 0; j < new_matrix.get_cols(); j++) {
-					for (int k = 0; k < new_matrix.get_cols(); k++) {
+					for (int k = 0; k < rhs.Rows; k++) {
 						new_matrix.Data[i][j] += Data[i][k] * rhs.Data[k][j];
 					}
 				}
 			}
+			return new_matrix;
 		}
 	};
 }
