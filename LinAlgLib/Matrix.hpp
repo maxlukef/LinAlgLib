@@ -73,6 +73,47 @@ namespace LinAlgLib {
 			Data[row][col] = new_val;
 		}
 
+		//Operators:-----------------------------------------------------------------------------------------------------------------------------------
 
+		Matrix<T> operator+(Matrix<T> const& other) {
+			if (other.Rows != Rows || other.Cols != Cols) {
+				//throw something - make mismatched dimension exception
+			}
+			Matrix<T> new_matrix(Rows, Cols);
+			for (int i = 0; i < Rows; i++) {
+				for (int j = 0; j < Cols; j++) {
+					new_matrix.Data[i][j] = Data[i][j] + other.Data[i][j];
+				}
+			}
+			return new_matrix;
+		}
+
+		Matrix<T> operator-(Matrix<T> const& other) {
+			if (other.Rows != Rows || other.Cols != Cols) {
+				//throw something - make mismatched dimension exception
+			}
+			Matrix<T> new_matrix(Rows, Cols);
+			for (int i = 0; i < Rows; i++) {
+				for (int j = 0; j < Cols; j++) {
+					new_matrix.Data[i][j] = Data[i][j] - other.Data[i][j];
+				}
+			}
+			return new_matrix;
+		}
+
+		Matrix<T> operator*(Matrix<T> const& rhs) {
+			if (rhs.Rows != Cols) {
+				//throw something - make mismatched dimension exception
+			}
+			Matrix<T> new_matrix(Rows, rhs.Cols);
+			for (int i = 0; i < new_matrix.get_rows(); i++) {
+				for (int j = 0; j < new_matrix.get_cols(); j++) {
+					for (int k = 0; k < rhs.Rows; k++) {
+						new_matrix.Data[i][j] += Data[i][k] * rhs.Data[k][j];
+					}
+				}
+			}
+			return new_matrix;
+		}
 	};
 }
