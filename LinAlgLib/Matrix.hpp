@@ -1,4 +1,5 @@
 #include <vector>
+#include "DimensionException.hpp"
 
 namespace LinAlgLib {
 	template <class T> class Matrix {
@@ -30,11 +31,11 @@ namespace LinAlgLib {
 		//Constructor that takes rows, cols, and data
 		Matrix<T>(int rows, int cols, std::vector<std::vector<T>>& data) {
 			if (data.size() != rows) {
-				//throw something
+				throw new DimensionException("Data does not match rows and cols");
 			}
 			for (int i = 0; i < rows; i++) {
 				if (data[i].size() != cols) {
-					//throw something
+					throw new DimensionException("Data does not match rows and cols");
 				}
 			}
 			Rows = rows;
@@ -45,10 +46,10 @@ namespace LinAlgLib {
 		//Simple getters:-----------------------------------------------------------------------------------------------------------------------------
 		T get_element(int row, int col) {
 			if (row < 0 || row >= this->Rows) {
-				//throw some kind of element out of bounds exception
+				throw new DimensionException("Row is out of bounds");
 			}
 			if (col < 0 || col >= this->Cols) {
-				//throw some kind of element out of bounds exception
+				throw new DimensionException("Col is out of bounds");
 			}
 			return Data[row][col];
 		}
@@ -65,10 +66,10 @@ namespace LinAlgLib {
 
 		void set_element(int row, int col, T new_val) {
 			if (row < 0 || row >= Rows) {
-				//throw something
+				throw new DimensionException("Row is out of bounds");
 			}
 			if (col < 0 || col >= Cols) {
-				//throw something
+				throw new DimensionException("Col is out of bounds");
 			}
 			Data[row][col] = new_val;
 		}
@@ -77,7 +78,7 @@ namespace LinAlgLib {
 
 		Matrix<T> operator+(Matrix<T> const& other) {
 			if (other.Rows != Rows || other.Cols != Cols) {
-				//throw something - make mismatched dimension exception
+				throw new DimensionException("Matrices must have the same dimensions to be added");
 			}
 			Matrix<T> new_matrix(Rows, Cols);
 			for (int i = 0; i < Rows; i++) {
@@ -90,7 +91,7 @@ namespace LinAlgLib {
 
 		Matrix<T> operator-(Matrix<T> const& other) {
 			if (other.Rows != Rows || other.Cols != Cols) {
-				//throw something - make mismatched dimension exception
+				throw new DimensionException("Matrices must have the same dimensions to be subtracted");
 			}
 			Matrix<T> new_matrix(Rows, Cols);
 			for (int i = 0; i < Rows; i++) {
@@ -103,7 +104,7 @@ namespace LinAlgLib {
 
 		Matrix<T> operator*(Matrix<T> const& rhs) {
 			if (rhs.Rows != Cols) {
-				//throw something - make mismatched dimension exception
+				throw new DimensionException("Number of columns in first matrix must be equal to number of rows in the second for multiplication");
 			}
 			Matrix<T> new_matrix(Rows, rhs.Cols);
 			for (int i = 0; i < new_matrix.get_rows(); i++) {
