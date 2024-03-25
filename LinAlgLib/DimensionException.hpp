@@ -4,16 +4,22 @@
 namespace LinAlgLib {
 	//The exception to use for errors caused by incompatible matrix dimensions
 	class DimensionException : public std::exception {
-		char * msg;
+		char * message;
 	public:
 		DimensionException() {
-			msg = "Incompatible matrix dimensions";
+			message = "Incompatible matrix dimensions";
 		}
 		DimensionException(char * msg) {
-			msg = msg;
+			message = msg;
+		}
+		DimensionException(const DimensionException& old) {
+			strcpy(message, old.message);
+		}
+		~DimensionException() {
+
 		}
 		char* what() {
-			return msg;
+			return message;
 		}
 	};
 }

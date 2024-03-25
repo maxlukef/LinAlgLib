@@ -31,11 +31,11 @@ namespace LinAlgLib {
 		//Constructor that takes rows, cols, and data
 		Matrix<T>(int rows, int cols, std::vector<std::vector<T>>& data) {
 			if (data.size() != rows) {
-				throw new DimensionException("Data does not match rows and cols");
+				throw DimensionException("Data does not match rows and cols");
 			}
 			for (int i = 0; i < rows; i++) {
 				if (data[i].size() != cols) {
-					throw new DimensionException("Data does not match rows and cols");
+					throw DimensionException("Data does not match rows and cols");
 				}
 			}
 			Rows = rows;
@@ -46,10 +46,10 @@ namespace LinAlgLib {
 		//Simple getters:-----------------------------------------------------------------------------------------------------------------------------
 		T get_element(int row, int col) {
 			if (row < 0 || row >= this->Rows) {
-				throw new DimensionException("Row is out of bounds");
+				throw DimensionException("Row is out of bounds");
 			}
 			if (col < 0 || col >= this->Cols) {
-				throw new DimensionException("Col is out of bounds");
+				throw DimensionException("Col is out of bounds");
 			}
 			return Data[row][col];
 		}
@@ -62,14 +62,15 @@ namespace LinAlgLib {
 			return Cols;
 		}
 
+
 		//Simple setters:------------------------------------------------------------------------------------------------------------------------------
 
 		void set_element(int row, int col, T new_val) {
 			if (row < 0 || row >= Rows) {
-				throw new DimensionException("Row is out of bounds");
+				throw DimensionException("Row is out of bounds");
 			}
 			if (col < 0 || col >= Cols) {
-				throw new DimensionException("Col is out of bounds");
+				throw DimensionException("Col is out of bounds");
 			}
 			Data[row][col] = new_val;
 		}
@@ -78,7 +79,7 @@ namespace LinAlgLib {
 
 		Matrix<T> operator+(Matrix<T> const& other) {
 			if (other.Rows != Rows || other.Cols != Cols) {
-				throw new DimensionException("Matrices must have the same dimensions to be added");
+				throw DimensionException("Matrices must have the same dimensions to be added");
 			}
 			Matrix<T> new_matrix(Rows, Cols);
 			for (int i = 0; i < Rows; i++) {
@@ -91,7 +92,7 @@ namespace LinAlgLib {
 
 		Matrix<T> operator-(Matrix<T> const& other) {
 			if (other.Rows != Rows || other.Cols != Cols) {
-				throw new DimensionException("Matrices must have the same dimensions to be subtracted");
+				throw DimensionException("Matrices must have the same dimensions to be subtracted");
 			}
 			Matrix<T> new_matrix(Rows, Cols);
 			for (int i = 0; i < Rows; i++) {
@@ -104,7 +105,7 @@ namespace LinAlgLib {
 
 		Matrix<T> operator*(Matrix<T> const& rhs) {
 			if (rhs.Rows != Cols) {
-				throw new DimensionException("Number of columns in first matrix must be equal to number of rows in the second for multiplication");
+				throw DimensionException("Number of columns in first matrix must be equal to number of rows in the second for multiplication");
 			}
 			Matrix<T> new_matrix(Rows, rhs.Cols);
 			for (int i = 0; i < new_matrix.get_rows(); i++) {
