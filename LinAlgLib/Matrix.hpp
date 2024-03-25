@@ -90,6 +90,17 @@ namespace LinAlgLib {
 			return new_matrix;
 		}
 
+		void operator+=(Matrix<T> const& other) {
+			if (other.Rows != Rows || other.Cols != Cols) {
+				throw DimensionException("Matrices must have the same dimensions to be added");
+			}
+			for (int i = 0; i < Rows; i++) {
+				for (int j = 0; j < Cols; j++) {
+					Data[i][j] = Data[i][j] + other.Data[i][j];
+				}
+			}
+		}
+
 		Matrix<T> operator-(Matrix<T> const& other) {
 			if (other.Rows != Rows || other.Cols != Cols) {
 				throw DimensionException("Matrices must have the same dimensions to be subtracted");
@@ -98,6 +109,18 @@ namespace LinAlgLib {
 			for (int i = 0; i < Rows; i++) {
 				for (int j = 0; j < Cols; j++) {
 					new_matrix.Data[i][j] = Data[i][j] - other.Data[i][j];
+				}
+			}
+			return new_matrix;
+		}
+
+		void operator-=(Matrix<T> const& other) {
+			if (other.Rows != Rows || other.Cols != Cols) {
+				throw DimensionException("Matrices must have the same dimensions to be subtracted");
+			}
+			for (int i = 0; i < Rows; i++) {
+				for (int j = 0; j < Cols; j++) {
+					Data[i][j] = Data[i][j] - other.Data[i][j];
 				}
 			}
 			return new_matrix;
@@ -116,6 +139,26 @@ namespace LinAlgLib {
 				}
 			}
 			return new_matrix;
+		}
+
+		Matrix<T> operator*=(Matrix<T> const& rhs) {
+			if (rhs.Rows != Cols) {
+				throw DimensionException("Number of columns in first matrix must be equal to number of rows in the second for multiplication");
+			}
+			Matrix<T> new_matrix(Rows, rhs.Cols);
+			std::vector<std::vector<T>> newData = std::vector<std::vector<T>>();
+			for (int i = 0; i < Rows; i++) {
+				newData.push_back(std::vector<T>(rhs.Cols, 0.0));
+			}
+
+			for (int i = 0; i < new_matrix.get_rows(); i++) {
+				for (int j = 0; j < new_matrix.get_cols(); j++) {
+					for (int k = 0; k < rhs.Rows; k++) {
+						newData[i][j] += Data[i][k] * rhs.Data[k][j];
+					}
+				}
+			}
+			Data = newData;
 		}
 	};
 }
