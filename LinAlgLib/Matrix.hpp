@@ -164,9 +164,9 @@ namespace LinAlgLib {
 		//Performs scalar multiplication, setting this matrix to the result.
 		void operator*=(T const& rhs) {
 
-			for (int i = 0; i < new_matrix.get_rows(); i++) {
-				for (int j = 0; j < new_matrix.get_cols(); j++) {
-					Data[i][j] = Data[i][j] * rhs
+			for (int i = 0; i < Rows; i++) {
+				for (int j = 0; j < Cols; j++) {
+					Data[i][j] = Data[i][j] * rhs;
 				}
 			}
 			

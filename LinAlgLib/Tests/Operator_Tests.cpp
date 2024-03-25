@@ -14,6 +14,28 @@ TEST(OperatorTests, AddTest) {
 	ASSERT_EQ(res.get_element(1, 1), 8.0);
 }
 
+//Tests the * operator for scalar multiplication
+TEST(OperatorTests, ScalarMultTest) {
+	std::vector<std::vector<double>> d = { {1,2},{3,4} };
+	LinAlgLib::Matrix<double> m(2, 2, d);
+	LinAlgLib::Matrix<double> res = m * 2;
+	ASSERT_EQ(res.get_element(0, 0), 2.0);
+	ASSERT_EQ(res.get_element(0, 1), 4.0);
+	ASSERT_EQ(res.get_element(1, 0), 6.0);
+	ASSERT_EQ(res.get_element(1, 1), 8.0);
+}
+
+//Tests the *= operator for scalar multiplication
+TEST(OperatorTests, ScalarMultEqTest) {
+	std::vector<std::vector<double>> d = { {1,2},{3,4} };
+	LinAlgLib::Matrix<double> res(2, 2, d);
+	res *= 2;
+	ASSERT_EQ(res.get_element(0, 0), 2.0);
+	ASSERT_EQ(res.get_element(0, 1), 4.0);
+	ASSERT_EQ(res.get_element(1, 0), 6.0);
+	ASSERT_EQ(res.get_element(1, 1), 8.0);
+}
+
 //Tests +=
 TEST(OperatorTests, AddEqTest) {
 	std::vector<std::vector<double>> d = { {1,2},{3,4} };
