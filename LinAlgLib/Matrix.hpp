@@ -54,10 +54,12 @@ namespace LinAlgLib {
 			return Data[row][col];
 		}
 
+		//Gets the number of rows in the matrix.
 		int get_rows() {
 			return Rows;
 		}
 
+		//Gets the number of columns in the matrix.
 		int get_cols() {
 			return Cols;
 		}
@@ -65,6 +67,7 @@ namespace LinAlgLib {
 
 		//Simple setters:------------------------------------------------------------------------------------------------------------------------------
 
+		//Sets the element at a specified row and column to a new value.
 		void set_element(int row, int col, T new_val) {
 			if (row < 0 || row >= Rows) {
 				throw DimensionException("Row is out of bounds");
@@ -77,6 +80,7 @@ namespace LinAlgLib {
 
 		//Operators:-----------------------------------------------------------------------------------------------------------------------------------
 
+		//Performs matrix addition, returning a new result matrix.
 		Matrix<T> operator+(Matrix<T> const& other) {
 			if (other.Rows != Rows || other.Cols != Cols) {
 				throw DimensionException("Matrices must have the same dimensions to be added");
@@ -90,6 +94,7 @@ namespace LinAlgLib {
 			return new_matrix;
 		}
 
+		//Performs matrix addition, setting this(left) matrix to the result
 		void operator+=(Matrix<T> const& other) {
 			if (other.Rows != Rows || other.Cols != Cols) {
 				throw DimensionException("Matrices must have the same dimensions to be added");
@@ -101,6 +106,7 @@ namespace LinAlgLib {
 			}
 		}
 
+		//Performs matrix subtraction, returning the result in a new matrix.
 		Matrix<T> operator-(Matrix<T> const& other) {
 			if (other.Rows != Rows || other.Cols != Cols) {
 				throw DimensionException("Matrices must have the same dimensions to be subtracted");
@@ -114,6 +120,7 @@ namespace LinAlgLib {
 			return new_matrix;
 		}
 
+		//Performs matrix subtraction, setting this matrix to the result.
 		void operator-=(Matrix<T> const& other) {
 			if (other.Rows != Rows || other.Cols != Cols) {
 				throw DimensionException("Matrices must have the same dimensions to be subtracted");
@@ -123,9 +130,10 @@ namespace LinAlgLib {
 					Data[i][j] = Data[i][j] - other.Data[i][j];
 				}
 			}
-			return new_matrix;
+			
 		}
 
+		//Performs matrix multiplication, returning the result matrix.
 		Matrix<T> operator*(Matrix<T> const& rhs) {
 			if (rhs.Rows != Cols) {
 				throw DimensionException("Number of columns in first matrix must be equal to number of rows in the second for multiplication");
@@ -141,7 +149,8 @@ namespace LinAlgLib {
 			return new_matrix;
 		}
 
-		Matrix<T> operator*=(Matrix<T> const& rhs) {
+		//Performs matrix multiplication, setting this matrix (left) to the result.
+		void operator*=(Matrix<T> const& rhs) {
 			if (rhs.Rows != Cols) {
 				throw DimensionException("Number of columns in first matrix must be equal to number of rows in the second for multiplication");
 			}
@@ -158,6 +167,7 @@ namespace LinAlgLib {
 					}
 				}
 			}
+			Cols = rhs.Cols;
 			Data = newData;
 		}
 	};
