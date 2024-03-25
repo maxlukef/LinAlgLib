@@ -3,7 +3,7 @@
 #
 
 # Declare the library
-add_library(LinAlgLib "Matrix.hpp")
+add_library(LinAlgLib "Matrix.hpp" "DimensionException.hpp")
 set_target_properties(LinAlgLib PROPERTIES LINKER_LANGUAGE CXX)
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET LinAlgLib PROPERTY CXX_STANDARD 20)

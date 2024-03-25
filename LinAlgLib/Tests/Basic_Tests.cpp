@@ -28,6 +28,7 @@ TEST(BasicTests, SmallCtorValueTest) {
 	ASSERT_EQ(m.get_cols(), 2);
 }
 
+
 TEST(BasicTests, SetterTest) {
 	LinAlgLib::Matrix<double> m(3, 3);
 	m.set_element(2, 2, 5);
@@ -36,4 +37,30 @@ TEST(BasicTests, SetterTest) {
 	ASSERT_EQ(m.get_element(2, 2), 5.0);
 	ASSERT_EQ(m.get_element(1, 0), -5.0);
 	ASSERT_EQ(m.get_element(0, 1), 10.0);
+}
+
+TEST(BasicTests, GetterThrowTest) {
+	LinAlgLib::Matrix<double> m(3, 3);
+	ASSERT_THROW(m.get_element(2, 3), LinAlgLib::DimensionException);
+	ASSERT_THROW(m.get_element(3, 2), LinAlgLib::DimensionException);
+	ASSERT_THROW(m.get_element(2, -1), LinAlgLib::DimensionException);
+	ASSERT_THROW(m.get_element(-1, 2), LinAlgLib::DimensionException);
+}
+
+TEST(BasicTests, SetterThrowTest) {
+	LinAlgLib::Matrix<double> m(3, 3);
+	ASSERT_THROW(m.set_element(2, 3, 3), LinAlgLib::DimensionException);
+	ASSERT_THROW(m.set_element(3, 2, 3), LinAlgLib::DimensionException);
+	ASSERT_THROW(m.set_element(2, -1, 3), LinAlgLib::DimensionException);
+	ASSERT_THROW(m.set_element(-1, 2, 3), LinAlgLib::DimensionException);
+}
+
+TEST(BasicTests, SmallCtorValueThrowTest) {
+	std::vector<std::vector<double>> d = { {1,2,3},{3,4} };
+	ASSERT_THROW(LinAlgLib::Matrix<double>(2, 2, d), LinAlgLib::DimensionException);
+}
+
+TEST(BasicTests, SmallCtorValueThrowTest2) {
+	std::vector<std::vector<double>> d = { {1,2},{3,4},{5,6} };
+	ASSERT_THROW(LinAlgLib::Matrix<double>(2, 2, d), LinAlgLib::DimensionException);
 }
