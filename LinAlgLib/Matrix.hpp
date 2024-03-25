@@ -149,6 +149,29 @@ namespace LinAlgLib {
 			return new_matrix;
 		}
 
+		//Performs scalar multiplication, returning the result in a new matrix.
+		Matrix<T> operator*(T const& rhs) {
+
+			Matrix<T> new_matrix(Rows, Cols);
+			for (int i = 0; i < new_matrix.get_rows(); i++) {
+				for (int j = 0; j < new_matrix.get_cols(); j++) {
+					new_matrix.Data[i][j] += Data[i][j] * rhs;
+				}
+			}
+			return new_matrix;
+		}
+
+		//Performs scalar multiplication, setting this matrix to the result.
+		void operator*=(T const& rhs) {
+
+			for (int i = 0; i < new_matrix.get_rows(); i++) {
+				for (int j = 0; j < new_matrix.get_cols(); j++) {
+					Data[i][j] = Data[i][j] * rhs
+				}
+			}
+			
+		}
+
 		//Performs matrix multiplication, setting this matrix (left) to the result.
 		void operator*=(Matrix<T> const& rhs) {
 			if (rhs.Rows != Cols) {
